@@ -8,9 +8,10 @@ datasource db {
 }
 
 model Employee {
-  employee_id  Int            @id @default(autoincrement())
+  id           Int            @id @default(autoincrement())
   name         String
   email        String         @unique
+  password     String
   role         String
   Availability Availability[]
   Project      Project[]
@@ -18,34 +19,34 @@ model Employee {
 }
 
 model Availability {
-  availability_id Int      @id @default(autoincrement())
-  employee_id     Int
-  date            DateTime
-  start_time      DateTime
-  end_time        DateTime
+  id           Int      @id @default(autoincrement())
+  employee_id  Int
+  date         DateTime
+  start_time   DateTime
+  end_time     DateTime
 
-  employee Employee @relation(fields: [employee_id], references: [employee_id])
+  employee     Employee @relation(fields: [employee_id], references: [id])
 }
 
 model Project {
-  project_id      Int    @id @default(autoincrement())
-  name            String
-  description     String
+  id            Int    @id @default(autoincrement())
+  name          String
+  description   String
   allocated_hours Int
-  employee_id     Int?
-  status          String
+  employee_id   Int
+  status        String
 
-  manager Employee? @relation(fields: [employee_id], references: [employee_id])
-  WorkLog WorkLog[]
+  manager       Employee @relation(fields: [employee_id], references: [id])
+  WorkLog       WorkLog[]
 }
 
 model WorkLog {
-  worklog_id   Int      @id @default(autoincrement())
+  id           Int      @id @default(autoincrement())
   employee_id  Int
   project_id   Int
   hours_logged Float
   log_date     DateTime
 
-  employee Employee @relation(fields: [employee_id], references: [employee_id])
-  project  Project  @relation(fields: [project_id], references: [project_id])
+  employee     Employee @relation(fields: [employee_id], references: [id])
+  project      Project  @relation(fields: [project_id], references: [id])
 }

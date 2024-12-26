@@ -1,4 +1,5 @@
 .vscode
+test.ts
 
 # compiled output
 /dist
