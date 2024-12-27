@@ -8,7 +8,7 @@ export class AuthController {
 
   @HttpCode(HttpStatus.OK)
   @Post('employee/login')
-  signIn(@Body() signInDto: signInDto) {
-    return this.authService.employeeSignIn(signInDto.email, signInDto.password);
+  employeeLogIn(@Body() signInDto: signInDto) {
+    return this.authService.employeeLogIn(signInDto.email, signInDto.password);
   }
 }
